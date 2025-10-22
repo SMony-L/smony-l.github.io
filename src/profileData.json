@@ -1,8 +1,8 @@
 {
 	"landing": {
-		"firstName": "Sovanmony",
+		"firstName": "Sovanmony \"Mony\" ",
 		"lastName": "Lim",
-		"phoneNumber": "(978) 996-3370",
+		"phoneNumber": "(857)-776-2663",
 		"bio": "Passionate programmer with an entrepreneurial mindset. Enjoy learning new emerging technologies and applications in the real world. Experienced Engineer with a demonstrated history of working in specialized financial services and technology. Skilled in Python, C++, JavaScript, and web development. Interested in Fin-Tech, IoT, Payment Services, Financial Services, Crypto-currency, Blockchain, Logistics, and Stock Market. Learn, Share and Inspire.",
 		"email": "l.sovanmony@gmail.com",
 		"linkedin": "https://www.linkedin.com/in/smonylim/",
@@ -10,11 +10,25 @@
 	},
 	"experience": [
 		{
-			"position": "Solution Architect",
+			"position": "Customer Success Architect",
+			"organization": "GitHub",
+			"aboutWork": "Providing technical guidance and solution architecture to enterprise customers, enabling successful adoption of GitHub's platform and tools. Leading customer engagements to understand requirements and deliver tailored solutions that drive business value.",
+			"fromDate": "September 2025",
+			"toDate": "Present"
+		},
+		{
+			"position": "Senior Customer Success Engineer",
+			"organization": "Logz.io",
+			"aboutWork": "Delivered technical expertise and strategic guidance to customers implementing observability and security solutions. Collaborated with cross-functional teams to drive product adoption, resolve complex technical challenges, and ensure customer success.",
+			"fromDate": "April 2024",
+			"toDate": "September 2025"
+		},
+		{
+			"position": "Solutions Architect",
 			"organization": "Very Good Security",
 			"aboutWork": "Spearheading customer engagement by actively participating in technical pre-sale calls to fully comprehend client requirements and pain points, facilitating the proposal of tailored, innovative solutions. Delivering 'best practices' architectures for the solution ecosystem, covering applications, systems, business processes, technology, integrations, and data analytics, ensuring optimal client solutions. Engaging closely with business, product, and engineering teams to drive product success, leveraging in-depth insights into industry trends and business needs to enhance Go-To-Market (GTM) activities and provide customer feedback",
 			"fromDate": "January 2023",
-			"toDate": "Present"
+			"toDate": "April 2024"
 		},
 		{
 			"position": "Site Reliability Engineer",
@@ -70,42 +84,49 @@
 			"university": "University of Massachusetts Lowell",
 			"degree": "Bachelor of Science",
 			"major": "Computer Science with minor Business Management",
-			"fromDate": "September 2016",
-			"toDate": "December 2019"
+			"fromDate": "NA",
+			"toDate": "NA"
 		}
 	],
-		"skills": [{
-			"name": "C/C++"
-		},
+	"skills": [
 		{
 			"name": "Python"
+		},
+		{
+			"name": "JavaScript"
+		},
+		{
+			"name": "TypeScript"
 		},
 		{
 			"name": "Java"
 		},
 		{
-			"name": "HTML5"
+			"name": "C++"
 		},
 		{
-			"name": "CSS3"
+			"name": "Bash"
 		},
 		{
-			"name": "Javascript"
+			"name": "React"
 		},
 		{
-			"name": "MySQL"
-		},
-		{
-			"name": "React.js"
+			"name": "Next.js"
 		},
 		{
 			"name": "Node.js"
 		},
 		{
-			"name": "Git"
+			"name": "Flask"
 		},
 		{
-			"name": "GitHub"
+			"name": "Gatsby"
+		},
+		{
+			"name": "AWS"
+		},
+		{
+			"name": "Azure"
 		},
 		{
 			"name": "Docker"
@@ -114,79 +135,31 @@
 			"name": "Kubernetes"
 		},
 		{
-			"name": "Exposure to TypeScript"
-		},
-		{
-			"name": "CLI tools"
+			"name": "Nginx"
 		},
 		{
 			"name": "Grafana"
 		},
 		{
-			"name": "Rollbar"
+			"name": "MongoDB"
 		},
 		{
-			"name": "Jira"
+			"name": "MySQL"
 		},
 		{
-			"name": "Confluence"
+			"name": "PostgreSQL"
 		},
 		{
-			"name": "Familiar with Swift"	
-		},
-		{
-			"name": "Familiar with Groovy"
-		},
-		{
-			"name": "Knowledge in Kotlin"
-		},
-		{
-			"name": "Familiar with Kafka"
-		},
-		{
-			"name": "AWS (EC2, EKS, Lambda)"
-		},
-		{
-			"name": "Terraform"
-		},
-		{
-			"name": "CI/CD"
-		},
-		{
-			"name": "Helm"
-		},
-		{
-			"name": "Apache Airflow"
-		},
-		{
-			"name": "Dagster"
-		},
-		{
-			"name": "Postman"
-		},
-		{
-			"name": "Prometheus"
+			"name": "Git"
 		},
 		{
 			"name": "Linux"
 		},
 		{
-			"name": "Windows"
+			"name": "Postman"
 		},
 		{
-			"name": "macOS"
-		},
-		{
-			"name": "Terminal"
-		},
-		{
-			"name": "iOS and Android SDK"
-		},
-		{
-			"name": "Exposure to NoSQL (MongoDB)"
-		},
-		{
-			"name": "RESTful API"
+			"name": "Android"
 		}
 	],
 	"projects": [{

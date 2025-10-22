@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-
+import { faCode } from "@fortawesome/free-solid-svg-icons";
+import './Skills.css';
 
 class Skills extends Component {
   constructor(props) {
@@ -11,22 +11,27 @@ class Skills extends Component {
   }
 
   render() {
-    return(
-      <section className="resume-section p-3 p-lg-5 d-flex align-items-center" id="skills">
-        <div className="w-100">
-          <h2 className="mb-5">Skills</h2>
-          <div className="subheading mb-3">Programming Languages &amp; Tools</div>
-          <div className="row">
-          {
-            this.skills.map((data, index) => (
-              <div key={index} className="col-6">
-                <p className="list-item">
-                  <FontAwesomeIcon icon={faCheckCircle} color="green" />
-                  <span className="ml-3">{data.name}</span>
-                </p>
+    return (
+      <section className="portfolio-section" id="skills">
+        <div className="section-container">
+          <h2 className="section-title">Skills</h2>
+          
+          <div className="skills-intro">
+            <FontAwesomeIcon icon={faCode} className="skills-intro-icon" />
+            <p>Programming Languages & Tools</p>
+          </div>
+
+          <div className="skills-grid">
+            {this.skills.map((data, index) => (
+              <div 
+                key={index} 
+                className="skill-badge fade-in-up"
+                style={{ animationDelay: `${index * 0.05}s` }}
+              >
+                <span className="skill-name">{data.name}</span>
+                <div className="skill-glow"></div>
               </div>
-            ))
-          }
+            ))}
           </div>
         </div>
       </section>

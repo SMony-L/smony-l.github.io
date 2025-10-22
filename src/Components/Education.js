@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGraduationCap, faAward } from "@fortawesome/free-solid-svg-icons";
+import './Education.css';
 
 class Education extends Component {
   constructor(props) {
@@ -8,24 +11,39 @@ class Education extends Component {
   }
 
   render() {
-    return(
-      <section className="resume-section p-3 p-lg-5 d-flex align-items-center" id="education">
-        <div className="w-100">
-          <h2 className="mb-5">Education</h2>
-          {
-            this.education.map((data, index) => (
-              <div key={index} className="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="resume-content">
-                  <h3 className="mb-0">{data.university}</h3>
-                  <div className="subheading mb-3">{data.degree}</div>
-                  <div className="lead mb-5">{data.major}</div>
+    return (
+      <section className="portfolio-section" id="education">
+        <div className="section-container">
+          <h2 className="section-title">Education</h2>
+          
+          <div className="education-grid">
+            {this.education.map((data, index) => (
+              <div key={index} className="education-card modern-card fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+                {/* Icon */}
+                <div className="education-icon">
+                  <FontAwesomeIcon icon={faGraduationCap} />
                 </div>
-                <div className="resume-date text-md-right">
-                  <span className="text-primary">{data.fromDate} - {data.toDate}</span>
+
+                {/* Content */}
+                <div className="education-content">
+                  <h3 className="education-university">{data.university}</h3>
+                  
+                  <div className="education-degree">
+                    <FontAwesomeIcon icon={faAward} className="degree-icon" />
+                    <span>{data.degree}</span>
+                  </div>
+
+                  <p className="education-major">{data.major}</p>
+
+                  {data.fromDate !== "NA" && data.toDate !== "NA" && (
+                    <div className="education-date">
+                      {data.fromDate} - {data.toDate}
+                    </div>
+                  )}
                 </div>
               </div>
-            ))
-          }
+            ))}
+          </div>
         </div>
       </section>
     );

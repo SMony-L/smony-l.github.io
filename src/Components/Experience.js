@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBriefcase, faCalendar } from "@fortawesome/free-solid-svg-icons";
+import './Experience.css';
 
 class Experience extends Component {
   constructor(props) {
@@ -8,24 +11,39 @@ class Experience extends Component {
   }
 
   render() {
-    return(
-      <section className="resume-section p-3 p-lg-5 d-flex justify-content-center" id="experience">
-        <div className="w-100">
-          <h2 className="mb-5">Experience</h2>
-          {
-            this.experience.map((exp, index) => (
-              <div key={index} className="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="resume-content">
-                  <h3 className="mb-0">{exp.position}</h3>
-                  <div className="subheading mb-3">{exp.organization}</div>
-                  <p>{exp.aboutWork}</p>
+    return (
+      <section className="portfolio-section" id="experience">
+        <div className="section-container">
+          <h2 className="section-title">Experience</h2>
+          
+          <div className="experience-timeline">
+            {this.experience.map((exp, index) => (
+              <div key={index} className="experience-item modern-card fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+                {/* Timeline Connector */}
+                <div className="timeline-connector">
+                  <div className="timeline-dot">
+                    <FontAwesomeIcon icon={faBriefcase} />
+                  </div>
+                  {index < this.experience.length - 1 && <div className="timeline-line"></div>}
                 </div>
-                <div className="resume-date text-md-right">
-                  <span className="text-primary">{exp.fromDate} - {exp.toDate}</span>
+
+                {/* Content */}
+                <div className="experience-content">
+                  <div className="experience-header">
+                    <div className="experience-title-group">
+                      <h3 className="experience-position">{exp.position}</h3>
+                      <h4 className="experience-organization">{exp.organization}</h4>
+                    </div>
+                    <div className="experience-date">
+                      <FontAwesomeIcon icon={faCalendar} className="date-icon" />
+                      <span>{exp.fromDate} - {exp.toDate}</span>
+                    </div>
+                  </div>
+                  <p className="experience-description">{exp.aboutWork}</p>
                 </div>
               </div>
-            ))
-          }
+            ))}
+          </div>
         </div>
       </section>
     );

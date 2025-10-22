@@ -1,0 +1,178 @@
+/* Footer Styles */
+.portfolio-footer {
+  background: var(--card-bg);
+  border-top: 1px solid var(--border-color);
+  padding: 48px 60px 32px;
+  margin-left: 280px;
+  position: relative;
+  z-index: 10;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Footer Main */
+.footer-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+/* Copilot Badge */
+.copilot-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background: rgba(102, 126, 234, 0.1);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.copilot-badge:hover {
+  background: rgba(102, 126, 234, 0.15);
+  border-color: rgba(102, 126, 234, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+}
+
+.copilot-icon {
+  width: 24px;
+  height: 24px;
+  color: #a8b5ff;
+}
+
+.copilot-badge span {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.copilot-badge strong {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Footer Divider */
+.footer-divider {
+  width: 60px;
+  height: 3px;
+  background: var(--primary-gradient);
+  border-radius: 2px;
+}
+
+/* Footer Text */
+.footer-text {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0;
+  text-align: center;
+}
+
+.footer-text .gradient-text {
+  font-weight: 600;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+.footer-tech {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-tech span {
+  color: var(--text-secondary);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .portfolio-footer {
+    margin-left: 0;
+    padding: 40px 40px 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-footer {
+    padding: 36px 24px 24px;
+  }
+
+  .copilot-badge {
+    padding: 14px 24px;
+    font-size: 0.95rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .copilot-badge strong {
+    font-size: 1rem;
+  }
+
+  .footer-text {
+    font-size: 0.95rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .footer-tech {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .portfolio-footer {
+    padding: 32px 16px 20px;
+  }
+
+  .copilot-badge {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    gap: 8px;
+  }
+
+  .copilot-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .copilot-badge strong {
+    font-size: 0.95rem;
+  }
+
+  .footer-text {
+    font-size: 0.9rem;
+  }
+
+  .footer-bottom {
+    font-size: 0.85rem;
+    gap: 12px;
+  }
+
+  .footer-tech span {
+    font-size: 0.85rem;
+  }
+}
