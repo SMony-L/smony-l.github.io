@@ -83,19 +83,6 @@ Deploy to GitHub Pages:
 npm run deploy
 ```
 
-#### Configuring Repository About Section
-
-To ensure the GitHub Pages link appears prominently on your repository page:
-
-1. Navigate to your repository on GitHub
-2. Click on the **⚙️ Settings** tab
-3. Under **General**, locate the **About** section (right side of the repository homepage)
-4. Click **Edit repository details** (⚙️ icon)
-5. In the **Website** field, enter: `https://sovanmonylim.me`
-6. Click **Save changes**
-
-The live site link will now be displayed prominently on the right side of your repository's main page, making it easy for visitors to access the hosted site.
-
 ## 📝 Customization
 
 ### 1. Update Your Profile Information
