@@ -17,7 +17,7 @@ const Footer = () => {
           <div className="footer-divider"></div>
           
           <p className="footer-text">
-            <span className="footer-code">{'>'}</span> Designed & Built by <span className="gradient-text">Sovanmony Lim</span>
+            <span className="footer-code">{'>'}</span> Designed & Built by <span className="gradient-text">Sovan"mony" Lim</span>
           </p>
         </div>
 
