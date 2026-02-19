@@ -16,9 +16,17 @@ class Landing extends Component {
       <section className="landing-section portfolio-section" id="about">
         <div className="landing-container">
           <div className="landing-content">
-            {/* Animated Greeting */}
+            {/* Agent Status Bar */}
+            <div className="agent-status fade-in-up">
+              <span className="status-dot"></span>
+              <span className="status-text">AGENT ONLINE</span>
+              <span className="status-separator">|</span>
+              <span className="status-version">v2.0.26</span>
+            </div>
+
+            {/* Terminal-style Greeting */}
             <div className="greeting fade-in-up">
-              <span className="wave">👋</span> Hello, I'm
+              <span className="terminal-prompt">$</span> Hello, I'm
             </div>
 
             {/* Name with Gradient */}
@@ -29,7 +37,7 @@ class Landing extends Component {
 
             {/* Animated Title/Role */}
             <div className="landing-title fade-in-up">
-              <span className="typing-text">Solution Architect & Engineer</span>
+              <span className="typing-text">Customer Success Architect @ GitHub</span>
             </div>
 
             {/* Bio */}
@@ -87,6 +95,7 @@ class Landing extends Component {
             <div className="decoration-circle circle-1"></div>
             <div className="decoration-circle circle-2"></div>
             <div className="decoration-circle circle-3"></div>
+            <div className="grid-overlay"></div>
           </div>
         </div>
       </section>

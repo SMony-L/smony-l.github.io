@@ -1,15 +1,22 @@
-/* Modern Color Palette */
+/* Agentic Color Palette */
 :root {
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  --dark-bg: #0f1419;
-  --card-bg: #1a1f2e;
+  --primary-gradient: linear-gradient(135deg, #00d4ff 0%, #7b2ff7 100%);
+  --secondary-gradient: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
+  --accent-gradient: linear-gradient(135deg, #7b2ff7 0%, #ff00e5 100%);
+  --dark-bg: #0a0e17;
+  --card-bg: rgba(15, 20, 35, 0.8);
   --text-primary: #e4e6eb;
-  --text-secondary: #b0b3b8;
-  --border-color: rgba(255, 255, 255, 0.1);
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.4);
+  --text-secondary: #8b95a5;
+  --border-color: rgba(0, 212, 255, 0.12);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 12px 48px rgba(0, 212, 255, 0.15);
+  --neon-cyan: #00d4ff;
+  --neon-green: #00ff88;
+  --neon-purple: #7b2ff7;
+  --neon-pink: #ff00e5;
+  --glow-cyan: 0 0 20px rgba(0, 212, 255, 0.3);
+  --glow-green: 0 0 20px rgba(0, 255, 136, 0.3);
+  --mono-font: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
 }
 
 * {
@@ -22,6 +29,11 @@
   background: var(--dark-bg);
   min-height: 100vh;
   color: var(--text-primary);
+  background-image:
+    radial-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    radial-gradient(rgba(123, 47, 247, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px, 80px 80px;
+  background-position: 0 0, 20px 20px;
 }
 
 /* Smooth Scrolling */
@@ -69,6 +81,22 @@ html {
   background-clip: text;
   position: relative;
   display: inline-block;
+  letter-spacing: -0.02em;
+}
+
+.section-title::before {
+  content: '>';
+  font-family: var(--mono-font);
+  font-size: 1.5rem;
+  -webkit-text-fill-color: var(--neon-cyan);
+  margin-right: 12px;
+  opacity: 0.7;
+  animation: blink-cursor 1.5s step-end infinite;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 0.2; }
 }
 
 .section-title::after {
@@ -76,26 +104,31 @@ html {
   position: absolute;
   bottom: -10px;
   left: 0;
-  width: 60px;
-  height: 4px;
+  width: 80px;
+  height: 2px;
   background: var(--primary-gradient);
   border-radius: 2px;
+  box-shadow: var(--glow-cyan);
 }
 
 @media (max-width: 768px) {
   .section-title {
     font-size: 2rem;
   }
+  .section-title::before {
+    font-size: 1rem;
+  }
 }
 
 /* Card Styles */
 .modern-card {
   background: var(--card-bg);
+  backdrop-filter: blur(12px);
   border-radius: 16px;
   padding: 32px;
   margin-bottom: 24px;
   border: 1px solid var(--border-color);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
 }
@@ -107,7 +140,7 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--primary-gradient);
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.03) 0%, rgba(123, 47, 247, 0.03) 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 0;
@@ -115,12 +148,12 @@ html {
 
 .modern-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
-  border-color: rgba(102, 126, 234, 0.5);
+  box-shadow: var(--shadow-hover), inset 0 1px 0 rgba(0, 212, 255, 0.1);
+  border-color: rgba(0, 212, 255, 0.3);
 }
 
 .modern-card:hover::before {
-  opacity: 0.05;
+  opacity: 1;
 }
 
 .modern-card > * {
@@ -132,18 +165,20 @@ html {
 .badge-modern {
   display: inline-block;
   padding: 6px 16px;
-  background: rgba(102, 126, 234, 0.2);
-  border: 1px solid rgba(102, 126, 234, 0.4);
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.25);
   border-radius: 20px;
   font-size: 0.85rem;
-  color: #a8b5ff;
+  font-family: var(--mono-font);
+  color: var(--neon-cyan);
   margin-right: 8px;
   margin-bottom: 8px;
   transition: all 0.2s ease;
 }
 
 .badge-modern:hover {
-  background: rgba(102, 126, 234, 0.3);
+  background: rgba(0, 212, 255, 0.15);
+  box-shadow: var(--glow-cyan);
   transform: scale(1.05);
 }
 
@@ -159,11 +194,15 @@ html {
   transition: all 0.3s ease;
   text-decoration: none;
   display: inline-block;
+  font-family: var(--mono-font);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
 }
 
 .btn-modern:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
   color: white;
 }
 
@@ -203,4 +242,37 @@ html {
 
 .loading {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Agentic Scanline Effect */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* Status Indicator */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--neon-green);
+  box-shadow: 0 0 8px var(--neon-green), 0 0 16px rgba(0, 255, 136, 0.2);
+  animation: pulse-dot 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--neon-green); }
+  50% { opacity: 0.6; box-shadow: 0 0 16px var(--neon-green), 0 0 32px rgba(0, 255, 136, 0.3); }
+}
+
+/* Mono Text Helper */
+.mono {
+  font-family: var(--mono-font);
+}
+
+/* Glow border effect on focus/active */
+.glow-border {
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.1), inset 0 0 15px rgba(0, 212, 255, 0.05);
 }

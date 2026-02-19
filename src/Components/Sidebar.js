@@ -50,11 +50,11 @@ class Sidebar extends Component {
   render() {
     const { isOpen, activeSection } = this.state;
     const navItems = [
-      { id: 'about', label: 'About', icon: '👋' },
-      { id: 'experience', label: 'Experience', icon: '💼' },
-      { id: 'education', label: 'Education', icon: '🎓' },
+      { id: 'about', label: 'About', icon: '⌘' },
+      { id: 'experience', label: 'Experience', icon: '◆' },
+      { id: 'education', label: 'Education', icon: '◇' },
       { id: 'skills', label: 'Skills', icon: '⚡' },
-      { id: 'projects', label: 'Projects', icon: '🚀' }
+      { id: 'projects', label: 'Projects', icon: '▶' }
     ];
 
     return (
@@ -89,6 +89,10 @@ class Sidebar extends Component {
                 {this.sidebarData.firstName}<br />
                 <span className="gradient-text">{this.sidebarData.lastName}</span>
               </h2>
+              <div className="sidebar-agent-badge">
+                <span className="status-dot"></span>
+                <span>ACTIVE</span>
+              </div>
             </div>
 
             {/* Navigation */}

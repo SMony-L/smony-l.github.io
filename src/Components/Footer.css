@@ -1,7 +1,8 @@
 /* Footer Styles */
 .portfolio-footer {
-  background: var(--card-bg);
-  border-top: 1px solid var(--border-color);
+  background: rgba(10, 14, 23, 0.95);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(0, 212, 255, 0.08);
   padding: 48px 60px 32px;
   margin-left: 280px;
   position: relative;
@@ -28,24 +29,19 @@
   align-items: center;
   gap: 12px;
   padding: 16px 32px;
-  background: rgba(102, 126, 234, 0.1);
-  border: 1px solid rgba(102, 126, 234, 0.3);
+  background: rgba(0, 212, 255, 0.04);
+  border: 1px solid rgba(0, 212, 255, 0.12);
   border-radius: 12px;
   font-size: 1rem;
   transition: all 0.3s ease;
+  font-family: var(--mono-font);
 }
 
 .copilot-badge:hover {
-  background: rgba(102, 126, 234, 0.15);
-  border-color: rgba(102, 126, 234, 0.5);
+  background: rgba(0, 212, 255, 0.08);
+  border-color: rgba(0, 212, 255, 0.3);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
-}
-
-.copilot-icon {
-  width: 24px;
-  height: 24px;
-  color: #a8b5ff;
+  box-shadow: var(--glow-cyan);
 }
 
 .copilot-badge span {
@@ -78,15 +74,23 @@
   font-weight: 600;
 }
 
+.footer-code {
+  color: var(--neon-cyan);
+  font-family: var(--mono-font);
+  font-weight: 700;
+  margin-right: 4px;
+}
+
 /* Footer Bottom */
 .footer-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 24px;
-  border-top: 1px solid var(--border-color);
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+  border-top: 1px solid rgba(0, 212, 255, 0.06);
+  font-size: 0.85rem;
+  color: #3a4555;
+  font-family: var(--mono-font);
 }
 
 .footer-bottom p {
@@ -100,7 +104,12 @@
 }
 
 .footer-tech span {
-  color: var(--text-secondary);
+  color: #3a4555;
+}
+
+.tech-dot {
+  color: var(--neon-cyan) !important;
+  opacity: 0.5;
 }
 
 /* Responsive Styles */

@@ -5,9 +5,9 @@
   top: 0;
   width: 280px;
   height: 100vh;
-  background: rgba(26, 31, 46, 0.95);
-  backdrop-filter: blur(10px);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 14, 23, 0.95);
+  backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(0, 212, 255, 0.08);
   z-index: 1000;
   transition: transform 0.3s ease;
   overflow-y: auto;
@@ -29,8 +29,8 @@
 
 .profile-image-wrapper {
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: 130px;
+  height: 130px;
   margin: 0 auto 24px;
 }
 
@@ -39,7 +39,7 @@
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(0, 212, 255, 0.2);
   position: relative;
   z-index: 1;
 }
@@ -51,29 +51,47 @@
   right: -4px;
   bottom: -4px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-purple) 50%, var(--neon-green) 100%);
   z-index: 0;
-  opacity: 0.5;
-  animation: pulse-border 3s ease-in-out infinite;
+  opacity: 0.4;
+  animation: pulse-border 4s ease-in-out infinite;
 }
 
 @keyframes pulse-border {
   0%, 100% {
     transform: scale(1);
-    opacity: 0.5;
+    opacity: 0.4;
   }
   50% {
     transform: scale(1.05);
-    opacity: 0.8;
+    opacity: 0.7;
   }
 }
 
 .profile-name {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #e4e6eb;
   line-height: 1.3;
   margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Agent Badge in Sidebar */
+.sidebar-agent-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 4px 14px;
+  background: rgba(0, 255, 136, 0.06);
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  border-radius: 16px;
+  font-family: var(--mono-font);
+  font-size: 0.7rem;
+  color: var(--neon-green);
+  font-weight: 600;
+  letter-spacing: 0.15em;
 }
 
 /* Navigation */
@@ -85,20 +103,22 @@
 }
 
 .sidebar-nav li {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .nav-link-modern {
   display: flex;
   align-items: center;
   padding: 14px 20px;
-  color: #b0b3b8;
+  color: #6b7a8d;
   text-decoration: none;
-  border-radius: 12px;
+  border-radius: 10px;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   font-weight: 500;
+  font-family: var(--mono-font);
+  font-size: 0.9rem;
 }
 
 .nav-link-modern::before {
@@ -107,21 +127,21 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 3px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  width: 2px;
+  background: var(--primary-gradient);
   transform: scaleY(0);
   transition: transform 0.3s ease;
 }
 
 .nav-link-modern:hover {
-  background: rgba(102, 126, 234, 0.1);
-  color: #a8b5ff;
+  background: rgba(0, 212, 255, 0.06);
+  color: var(--neon-cyan);
   padding-left: 24px;
 }
 
 .nav-link-modern.active {
-  background: rgba(102, 126, 234, 0.15);
-  color: #a8b5ff;
+  background: rgba(0, 212, 255, 0.08);
+  color: var(--neon-cyan);
   padding-left: 24px;
 }
 
@@ -130,14 +150,15 @@
 }
 
 .nav-icon {
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-right: 12px;
   min-width: 24px;
+  text-align: center;
 }
 
 .nav-label {
   flex: 1;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .nav-indicator {
@@ -149,21 +170,24 @@
 }
 
 .nav-link-modern.active .nav-indicator {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--neon-cyan);
+  box-shadow: 0 0 8px var(--neon-cyan);
 }
 
 /* Sidebar Footer */
 .sidebar-footer {
   margin-top: auto;
   padding-top: 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(0, 212, 255, 0.08);
 }
 
 .sidebar-footer-text {
   text-align: center;
-  font-size: 0.85rem;
-  color: #6b7280;
+  font-size: 0.75rem;
+  color: #3a4555;
   margin: 0;
+  font-family: var(--mono-font);
+  letter-spacing: 0.05em;
 }
 
 /* Mobile Header */
@@ -174,9 +198,9 @@
   left: 0;
   right: 0;
   height: 70px;
-  background: rgba(26, 31, 46, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 14, 23, 0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.08);
   z-index: 1001;
 }
 
@@ -213,7 +237,7 @@
   display: block;
   width: 100%;
   height: 2px;
-  background: #e4e6eb;
+  background: var(--neon-cyan);
   border-radius: 2px;
   transition: all 0.3s ease;
 }
@@ -238,7 +262,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
   z-index: 999;
 }
 
@@ -286,7 +311,7 @@
 
 /* Scrollbar for Sidebar */
 .modern-sidebar::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 .modern-sidebar::-webkit-scrollbar-track {
@@ -294,10 +319,10 @@
 }
 
 .modern-sidebar::-webkit-scrollbar-thumb {
-  background: rgba(102, 126, 234, 0.3);
-  border-radius: 3px;
+  background: rgba(0, 212, 255, 0.2);
+  border-radius: 2px;
 }
 
 .modern-sidebar::-webkit-scrollbar-thumb:hover {
-  background: rgba(102, 126, 234, 0.5);
+  background: rgba(0, 212, 255, 0.4);
 }
