@@ -34,6 +34,32 @@
     radial-gradient(rgba(123, 47, 247, 0.02) 1px, transparent 1px);
   background-size: 40px 40px, 80px 80px;
   background-position: 0 0, 20px 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Holographic scanline overlay */
+.App::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 212, 255, 0.03) 0px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 9999;
+  animation: scanline-move 8s linear infinite;
+}
+
+@keyframes scanline-move {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(4px); }
 }
 
 /* Smooth Scrolling */
@@ -146,6 +172,36 @@ html {
   z-index: 0;
 }
 
+/* Holographic edge effect */
+.modern-card::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg,
+    var(--neon-cyan),
+    var(--neon-purple),
+    var(--neon-pink),
+    var(--neon-green),
+    var(--neon-cyan)
+  );
+  border-radius: 16px;
+  opacity: 0;
+  z-index: -1;
+  filter: blur(8px);
+  transition: opacity 0.3s ease;
+  background-size: 300% 300%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .modern-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-hover), inset 0 1px 0 rgba(0, 212, 255, 0.1);
@@ -154,6 +210,10 @@ html {
 
 .modern-card:hover::before {
   opacity: 1;
+}
+
+.modern-card:hover::after {
+  opacity: 0.4;
 }
 
 .modern-card > * {
@@ -174,12 +234,46 @@ html {
   margin-right: 8px;
   margin-bottom: 8px;
   transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.badge-modern:hover::before {
+  left: 100%;
 }
 
 .badge-modern:hover {
   background: rgba(0, 212, 255, 0.15);
   box-shadow: var(--glow-cyan);
   transform: scale(1.05);
+  animation: glitch-badge 0.3s ease;
+}
+
+@keyframes glitch-badge {
+  0%, 100% {
+    transform: scale(1.05) translate(0, 0);
+  }
+  25% {
+    transform: scale(1.05) translate(-2px, 0);
+  }
+  75% {
+    transform: scale(1.05) translate(2px, 0);
+  }
 }
 
 /* Button Styles */
