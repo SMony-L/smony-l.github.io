@@ -13,9 +13,9 @@ const Footer = () => {
             <span>Powered by</span>
             <strong className="gradient-text">GitHub Copilot</strong>
           </div>
-          
+
           <div className="footer-divider"></div>
-          
+
           <p className="footer-text">
             <span className="footer-code">{'>'}</span> Designed & Built by <span className="gradient-text">Sovan"mony" Lim</span>
           </p>
@@ -30,6 +30,13 @@ const Footer = () => {
             <span className="tech-dot">·</span>
             <span>GitHub Pages</span>
           </div>
+        </div>
+
+        {/* AI-themed decorative elements */}
+        <div className="footer-decorations">
+          <div className="footer-circuit"></div>
+          <div className="footer-circuit"></div>
+          <div className="footer-circuit"></div>
         </div>
       </div>
     </footer>

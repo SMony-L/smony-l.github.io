@@ -6,6 +6,11 @@ import Education from './Components/Education';
 import Skills from './Components/Skills';
 import Projects from './Components/Projects';
 import Footer from './Components/Footer';
+import ParticleBackground from './Components/ParticleBackground';
+import AIAssistant from './Components/AIAssistant';
+import MatrixRain from './Components/MatrixRain';
+import NeuralNetwork from './Components/NeuralNetwork';
+import AIStats from './Components/AIStats';
 import profileData from './profileData.json';
 import ReactGA from 'react-ga';
 import './App.css';
@@ -29,9 +34,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <NeuralNetwork />
+        <ParticleBackground />
+        <MatrixRain />
+        <AIAssistant />
         <Sidebar sidebarData={this.state.landingData} />
         <main className="main-content">
           <Landing landingData={this.state.landingData} />
+          <AIStats />
           <Experience experience={this.state.experience} />
           <Education education={this.state.education} />
           <Skills skills={this.state.skills} />
