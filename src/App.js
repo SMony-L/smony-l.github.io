@@ -9,6 +9,7 @@ import Footer from './Components/Footer';
 import ParticleBackground from './Components/ParticleBackground';
 import AIAssistant from './Components/AIAssistant';
 import MatrixRain from './Components/MatrixRain';
+import NeuralNetwork from './Components/NeuralNetwork';
 import AIStats from './Components/AIStats';
 import profileData from './profileData.json';
 import ReactGA from 'react-ga';
@@ -33,6 +34,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <NeuralNetwork />
         <ParticleBackground />
         <MatrixRain />
         <AIAssistant />
