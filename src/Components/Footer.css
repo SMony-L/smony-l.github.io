@@ -7,6 +7,33 @@
   margin-left: 280px;
   position: relative;
   z-index: 10;
+  overflow: hidden;
+}
+
+.portfolio-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--neon-cyan),
+    var(--neon-purple),
+    var(--neon-pink),
+    transparent
+  );
+  animation: scan-line 4s linear infinite;
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 .footer-content {
@@ -110,6 +137,57 @@
 .tech-dot {
   color: var(--neon-cyan) !important;
   opacity: 0.5;
+}
+
+/* Footer Decorations */
+.footer-decorations {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.05;
+  z-index: 0;
+}
+
+.footer-circuit {
+  position: absolute;
+  width: 2px;
+  background: var(--primary-gradient);
+  animation: circuit-pulse 3s ease-in-out infinite;
+}
+
+.footer-circuit:nth-child(1) {
+  height: 60%;
+  left: 15%;
+  bottom: 0;
+  animation-delay: 0s;
+}
+
+.footer-circuit:nth-child(2) {
+  height: 80%;
+  left: 50%;
+  bottom: 0;
+  animation-delay: 1s;
+}
+
+.footer-circuit:nth-child(3) {
+  height: 50%;
+  right: 20%;
+  bottom: 0;
+  animation-delay: 2s;
+}
+
+@keyframes circuit-pulse {
+  0%, 100% {
+    opacity: 0.1;
+    box-shadow: 0 0 5px var(--neon-cyan);
+  }
+  50% {
+    opacity: 0.3;
+    box-shadow: 0 0 15px var(--neon-cyan), 0 0 25px var(--neon-purple);
+  }
 }
 
 /* Responsive Styles */

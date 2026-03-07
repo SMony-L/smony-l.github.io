@@ -11,7 +11,6 @@ const ParticleBackground = () => {
     const ctx = canvas.getContext('2d');
     let animationFrameId;
     let particles = [];
-    let connections = [];
 
     // Set canvas size
     const resizeCanvas = () => {
