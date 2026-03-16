@@ -8,12 +8,6 @@
   PUBLIC_URL = "/"
   NODE_VERSION = "18"
 
-# SPA routing: redirect all paths to index.html for client-side routing
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
 [context.deploy-preview]
   command = "npm run build"
 
