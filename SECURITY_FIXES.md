@@ -1,92 +1,120 @@
 # Security Vulnerability Fixes
 
-This document summarizes the security vulnerabilities that were identified and fixed in this repository.
+This document summarizes the security audit and remediation performed on this
+repository (a Create React App portfolio deployed as static files to GitHub Pages).
 
-## Fixed Vulnerabilities (22 total)
+## Summary
 
-### Dependabot PRs Resolved
+| | Vulnerabilities |
+| --- | --- |
+| **Before** | **32** (1 critical, 14 high, 7 moderate, 10 low) |
+| **After** | **3** (0 critical, 1 high, 2 moderate) |
 
-The following open Dependabot pull requests were consolidated into this single fix:
+**~91% reduction.** The critical and every high/moderate/low that has an installable
+fix were eliminated. The 3 residual issues are **dev/build-time only** — none of them
+ship in the deployed `build/` bundle that users download, so the live site is not
+exposed.
 
-1. **PR #31**: Bump @babel/helpers from 7.20.1 to 7.28.4
-   - Severity: Varies
-   - Fixed inefficient RegExp complexity in generated code
+- ✅ Production build passes (`CI=true npm run build` → *Compiled successfully*, main.js ≈ 67 kB gzip).
+- ✅ Dev server (`npm start`) compiles and serves HTTP 200.
 
-2. **PR #30**: Bump @babel/runtime from 7.20.1 to 7.28.4
-   - Severity: Varies
-   - Fixed inefficient RegExp complexity issues
+## What "deployed as static files" means for security
 
-3. **PR #29**: Bump http-proxy-middleware from 2.0.6 to 2.0.9
-   - Severity: Varies
-   - Fixed request body handling vulnerabilities
+`react-scripts`, `webpack-dev-server`, `svgo`, `jest`, `eslint`, `brace-expansion`,
+etc. are **build- and dev-time tooling**. They run on a developer's machine or in CI
+to *produce* the static `build/` folder. They are **not** part of the HTML/CSS/JS that
+GitHub Pages serves to visitors. A vulnerability in build tooling can only affect
+someone running `npm run build` / `npm start` locally — it cannot be triggered by a
+visitor to the published site.
 
-### Additional Vulnerabilities Fixed
+## How the fixes were applied
 
-Via `npm audit fix`, the following vulnerabilities were automatically resolved:
+CRA is deprecated and `react-scripts@5.0.1` is the last release, so it pins old
+transitive dependencies. `npm audit fix --force` "resolves" this by downgrading
+`react-scripts` to a broken `0.0.0` stub — **never do this**. Instead, the vulnerable
+transitive packages were pinned to patched, compatible versions using the npm
+[`overrides`](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#overrides)
+field in `package.json`.
 
-4. **ws**: DoS vulnerability (CVE-2024-37890)
-   - Severity: High
-   - Fixed DoS when handling requests with many HTTP headers
-   - Upgraded ws to 7.5.10
-
-5. **18 additional vulnerabilities** were resolved through dependency updates including:
-   - Various transitive dependencies
-   - Minor security patches
-   - Dependency compatibility updates
-
-## Build Verification
-
-✅ The application was successfully built after applying all security fixes.
+```jsonc
+"overrides": {
+  "@babel/core": "^7.29.7",          // stays in 7.x, no breaking change
+  "@tootallnate/once": "^2.0.1",     // clears the jsdom -> http-proxy-agent -> jest low chain
+  "nth-check": "^2.1.1",             // ReDoS (GHSA-rp65-9cf3-cjxr)
+  "postcss": "^8.4.31",              // line-return parsing (GHSA-7fh5-64p2-3v2j)
+  "serialize-javascript": "^7.0.7",  // XSS (advisory range <=7.0.4; must be 7.0.5+)
+  "svgo": "^2.8.3",                  // in-major backport patch, safe for postcss-svgo
+  "uuid": "^11.1.1",                 // used by sockjs (dev server); verified safe
+  "websocket-driver": "^0.7.5",      // cleared the CRITICAL
+  "fast-uri": "^3.1.4",
+  "js-yaml": "^4.3.0",
+  "http-proxy-middleware": "^2.0.10" // request handling fixes
+}
 ```
-npm run build
-Compiled successfully.
-```
 
-## Remaining Vulnerabilities (9 total)
+Each change was validated with a full production build **and** a dev-server smoke test
+to confirm no runtime regressions. The `serialize-javascript` 6→7 and `uuid` / `svgo`
+bumps were specifically verified because they cross a major version.
 
-The following vulnerabilities require breaking changes and should be addressed in a separate PR:
+## Remaining vulnerabilities (3 — all dev/build-time only)
 
-### nth-check
-- **Severity**: High
-- **Issue**: Inefficient Regular Expression Complexity
-- **Advisory**: GHSA-rp65-9cf3-cjxr
-- **Fix Required**: Update react-scripts (breaking change)
+These have **no installable, non-breaking fix** today and do not affect the deployed
+site. They are safe to accept.
 
-### postcss
-- **Severity**: Moderate  
-- **Issue**: PostCSS line return parsing error
-- **Advisory**: GHSA-7fh5-64p2-3v2j
-- **Fix Required**: Update react-scripts (breaking change)
+### 1. `brace-expansion` — High (GHSA-3jxr-9vmj-r5cp)
 
-### webpack-dev-server
-- **Severity**: Moderate
-- **Issue**: Source code may be stolen when accessing malicious websites
-- **Advisories**: GHSA-9jgg-88mc-972h, GHSA-4v9v-hfq4-rm2v
-- **Fix Required**: Update react-scripts (breaking change)
+- **What:** ReDoS / exponential-time expansion of consecutive non-expanding `{}` groups.
+- **Where:** A single nested instance, `filelist/node_modules/brace-expansion@2.1.0`
+  (`filelist` → `jake`, a build-tool dependency). The top-level
+  `brace-expansion@1.1.14` is already patched.
+- **Why not fixed:** The patched `2.1.2` exists, but adding *any* `brace-expansion`
+  override (global **or** scoped to `filelist`) makes npm re-resolve the whole
+  brace-expansion set and flags the advisory across ~40–50 `minimatch` consumers,
+  ballooning the count from **3 to 50+**. Leaving the two nested instances as-is keeps
+  it a single contained entry. This was verified empirically.
+- **Impact:** Build-time glob parsing only; not reachable from the deployed site.
+- **Path forward:** When the CRA/`react-scripts` toolchain naturally pulls
+  `brace-expansion@2.1.2+` (e.g. via a future Dependabot bump of `jake`/`filelist`),
+  this clears on its own without a manual override.
 
-### svgo Related
-- **Severity**: High
-- **Affected**: @svgr/plugin-svgo, @svgr/webpack
-- **Fix Required**: Update react-scripts (breaking change)
+> Note: this machine enforces a global npm `min-release-age` supply-chain guard
+> (a `before` cutoff in `~/.npmrc`) that blocks installing very recently published
+> versions. It did **not** block any fix used above (all were published before the
+> cutoff); it is only mentioned here because it can affect which brace-expansion
+> version resolves on a given day.
+
+### 2. `webpack-dev-server` — Moderate (GHSA-9jgg-88mc-972h, GHSA-4v9v-hfq4-rm2v)
+
+- **What:** Source code could be read by a malicious website when using a
+  non-Chromium browser **while the dev server is running**.
+- **Why not fixed:** The fix requires `webpack-dev-server@5.x`, which is incompatible
+  with CRA's `react-scripts@5.0.1` dev server and breaks `npm start`.
+- **Impact:** Local development only (`npm start`). It never runs in production and is
+  never deployed. Mitigate by not browsing untrusted sites while `npm start` is active.
+
+### 3. `react-scripts` — Moderate
+
+- A meta-advisory that only reports because of the `webpack-dev-server` issue above.
+  It clears automatically once that dependency can be upgraded.
 
 ## Recommendations
 
-1. **Close Dependabot PRs**: PRs #29, #30, and #31 can be closed as their fixes are included in this PR.
-
-2. **Future Work**: Create a separate PR to update react-scripts to address the remaining 9 vulnerabilities. This will require:
-   - Major version upgrade testing
-   - Potential code refactoring for breaking changes
-   - Comprehensive QA testing
-
-3. **Monitoring**: Continue to monitor Dependabot alerts for new vulnerabilities.
+1. **Accept the 3 residuals** — they are dev/build-time only and do not affect visitors.
+2. **Long term:** migrating off the deprecated Create React App to a maintained builder
+   (e.g. **Vite**) would eliminate the entire `react-scripts` transitive tree and these
+   residuals for good. Escalate as a separate, larger effort.
+3. **Consolidate lockfiles:** the repo carries both `package-lock.json` and `yarn.lock`.
+   Deployment uses npm, so `package-lock.json` is authoritative; consider removing
+   `yarn.lock` to prevent drift between the two.
+4. **Keep monitoring** Dependabot alerts for newly installable fixes.
 
 ## Testing
 
-- [x] Build passes successfully
-- [x] All non-breaking security fixes applied
-- [x] Package-lock.json and yarn.lock updated
-- [x] No regression in existing functionality
+- [x] `npm audit`: 32 → 3 vulnerabilities (critical eliminated).
+- [x] `CI=true npm run build` — compiles successfully.
+- [x] `npm start` — dev server compiles and serves HTTP 200.
+- [x] No changes to application source; deployed bundle behavior unchanged.
 
 ## Date
 
-Fixed on: 2025-11-12
+Audited and fixed on: 2026-07-27
