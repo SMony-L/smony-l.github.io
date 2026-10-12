@@ -22,7 +22,8 @@ A modern, responsive personal portfolio website built with React.js. This projec
 - **Styling**: CSS3 with modern features (Grid, Flexbox, Custom Properties)
 - **Icons**: [FontAwesome](https://fontawesome.com/) for scalable vector icons
 - **Fonts**: Google Fonts (Inter & Space Grotesk)
-- **Build Tool**: Create React App
+- **Build Tool**: [Vite](https://vite.dev/)
+- **Tests**: [Vitest](https://vitest.dev/) with jsdom
 - **Deployment**: GitHub Pages via gh-pages
 - **Analytics**: React GA for Google Analytics integration
 
@@ -30,8 +31,8 @@ A modern, responsive personal portfolio website built with React.js. This projec
 
 Before you begin, ensure you have the following installed:
 
-- **Node.js** (v12.0.0 or higher) - [Download](https://nodejs.org/)
-- **npm** (v6.0.0 or higher) - Comes with Node.js
+- **Node.js** (24 LTS recommended; supported versions are listed in `package.json`) - [Download](https://nodejs.org/)
+- **npm** - Comes with Node.js; use npm and the committed `package-lock.json`, not Yarn
 - **Git** - [Download](https://git-scm.com/)
 
 ## 🚀 Installation
@@ -44,7 +45,7 @@ Before you begin, ensure you have the following installed:
 
 2. **Install Dependencies**
    ```bash
-   npm install
+   npm ci
    ```
 
 3. **Start Development Server**
@@ -75,6 +76,9 @@ Execute the test suite:
 ```bash
 npm test
 ```
+
+Use `npm run test:watch` for watch mode and `npm run preview` to preview the
+production build. Build output remains in `build/` for GitHub Pages and Netlify.
 
 ### Deployment
 
@@ -109,7 +113,7 @@ Edit `src/profileData.json` to add your personal information:
 
 ### 2. Replace Profile Picture
 
-Replace the file at `src/Assets/profile.jpg` with your photo. Keep the same filename or update the import in `src/Components/Sidebar.js`.
+Replace the file at `src/Assets/profile.jpg` with your photo. Keep the same filename or update the import in `src/Components/Sidebar.jsx`.
 
 ### 3. Customize Colors
 
@@ -132,29 +136,34 @@ Update the `homepage` field in `package.json`:
 "homepage": "https://yourdomain.com/"
 ```
 
+Vite uses the pathname of `homepage` as the asset base. Set `PUBLIC_URL=/` to
+override it for root-hosted deployments, as Netlify does. The HTML entry point
+is `index.html` at the repository root; static assets remain in `public/`.
+
 For detailed customization instructions, see [QUICK_START.md](QUICK_START.md).
 
 ## 📁 Project Structure
 
 ```
 .
+├── index.html             # Vite HTML entry point
+├── vite.config.mjs        # Build and test configuration
 ├── public/                 # Static files
-│   ├── index.html         # HTML template
 │   ├── favicon.ico        # Site favicon
 │   └── manifest.json      # PWA manifest
 ├── src/
-│   ├── App.js             # Main application component
+│   ├── App.jsx            # Main application component
 │   ├── App.css            # Global styles
-│   ├── index.js           # Entry point
+│   ├── index.jsx          # Entry point
 │   ├── index.css          # Base styles
 │   ├── profileData.json   # Your content (EDIT THIS!)
 │   ├── Components/        # React components
-│   │   ├── Sidebar.js     # Navigation sidebar
-│   │   ├── Landing.js     # Hero/landing section
-│   │   ├── Experience.js  # Work experience timeline
-│   │   ├── Education.js   # Education section
-│   │   ├── Skills.js      # Skills grid
-│   │   └── Projects.js    # Projects showcase
+│   │   ├── Sidebar.jsx    # Navigation sidebar
+│   │   ├── Landing.jsx    # Hero/landing section
+│   │   ├── Experience.jsx # Work experience timeline
+│   │   ├── Education.jsx  # Education section
+│   │   ├── Skills.jsx     # Skills grid
+│   │   └── Projects.jsx   # Projects showcase
 │   └── Assets/            # Images and media
 │       └── profile.jpg    # Your profile picture
 ├── package.json           # Project dependencies
@@ -213,11 +222,9 @@ netstat -ano | findstr :3000
 taskkill /PID <PID> /F
 ```
 
-### Clear npm Cache
+### Reinstall Locked Dependencies
 ```bash
-rm -rf node_modules
-rm package-lock.json
-npm install
+npm ci
 ```
 
 ### Build Errors
@@ -229,7 +236,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🙏 Acknowledgments
 
-- Built with [Create React App](https://github.com/facebook/create-react-app)
+- Built with [Vite](https://vite.dev/) and [React](https://react.dev/)
 - Icons by [FontAwesome](https://fontawesome.com/)
 - Fonts from [Google Fonts](https://fonts.google.com/)
 - Inspired by modern portfolio design trends

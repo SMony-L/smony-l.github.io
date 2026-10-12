@@ -3,10 +3,9 @@
   publish = "build"
 
 [build.environment]
-  # Override the homepage from package.json so assets use relative paths
-  # instead of pointing to the GitHub Pages URL
+  # Use root-relative asset paths regardless of the homepage pathname.
   PUBLIC_URL = "/"
-  NODE_VERSION = "18"
+  NODE_VERSION = "24"
 
 [context.deploy-preview]
   command = "npm run build"
