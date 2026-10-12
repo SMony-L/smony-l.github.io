@@ -2,6 +2,8 @@
 
 ## 🚀 Running Your Portfolio
 
+Use Node.js 24 LTS and install the committed dependency versions with `npm ci`.
+
 ### Development
 ```bash
 npm start
@@ -123,15 +125,15 @@ Edit `src/App.css` and change these CSS variables:
 
 ## 🖼️ Changing Profile Picture
 
-Replace `src/Assets/profile.jpg` with your photo. Keep the same filename or update the import in `Sidebar.js`.
+Replace `src/Assets/profile.jpg` with your photo. Keep the same filename or update the import in `Sidebar.jsx`.
 
 ## 🔧 Common Tasks
 
 ### Add New Section
 1. Create component in `src/Components/`
-2. Import in `App.js`
+2. Import in `App.jsx`
 3. Add to render method
-4. Add navigation link in `Sidebar.js`
+4. Add navigation link in `Sidebar.jsx`
 
 ### Change Fonts
 Edit the `@import` in `src/index.css`:
@@ -167,11 +169,9 @@ In browser DevTools:
 lsof -ti:3000 | xargs kill
 ```
 
-### Clear cache
+### Reinstall locked dependencies
 ```bash
-rm -rf node_modules
-rm package-lock.json
-npm install
+npm ci
 ```
 
 ### Build errors
@@ -184,18 +184,18 @@ npm run build
 
 ```
 src/
-├── App.js              # Main app component
+├── App.jsx             # Main app component
 ├── App.css            # Global styles
-├── index.js           # Entry point
+├── index.jsx          # Entry point
 ├── index.css          # Base styles
 ├── profileData.json   # YOUR CONTENT HERE
 ├── Components/
-│   ├── Sidebar.js     # Navigation
-│   ├── Landing.js     # Hero section
-│   ├── Experience.js  # Work history
-│   ├── Education.js   # Education
-│   ├── Skills.js      # Skills grid
-│   └── Projects.js    # Projects
+│   ├── Sidebar.jsx    # Navigation
+│   ├── Landing.jsx    # Hero section
+│   ├── Experience.jsx # Work history
+│   ├── Education.jsx  # Education
+│   ├── Skills.jsx     # Skills grid
+│   └── Projects.jsx   # Projects
 └── Assets/
     └── profile.jpg    # Your photo
 ```
