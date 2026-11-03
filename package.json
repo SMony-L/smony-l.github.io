@@ -13,7 +13,7 @@
     "react-ga": "^2.7.0"
   },
   "devDependencies": {
-    "gh-pages": "6.1.1",
+    "gh-pages": "6.3.0",
     "jsdom": "^29.1.1",
     "vite": "^8.3.2",
     "vitest": "^5.0.3"
