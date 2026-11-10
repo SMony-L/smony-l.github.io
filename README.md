@@ -1,6 +1,6 @@
 # Personal Portfolio Website
 
-A modern, responsive personal portfolio website built with React.js. This project provides a clean, professional platform to showcase your experience, education, skills, and projects with a beautiful dark-themed UI.
+A responsive personal portfolio built with React.js. A portrait-led, AI-inspired visual style showcases experience, education, skills, and projects while keeping the content easy to explore.
 
 ![React](https://img.shields.io/badge/React-16.8.6-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
@@ -8,10 +8,10 @@ A modern, responsive personal portfolio website built with React.js. This projec
 
 ## 🌟 Features
 
-- **Modern Dark Theme**: Eye-friendly dark color scheme with gradient accents
+- **AI-Inspired Design**: A portrait-led introduction with an orbital illustration and a black, white, and electric-blue palette
 - **Fully Responsive**: Optimized for mobile, tablet, and desktop devices
-- **Easy Customization**: Update content via a single JSON file
-- **Smooth Animations**: Elegant transitions and scroll effects
+- **Easy Customization**: Update the main profile content via a single JSON file
+- **Accessible Navigation**: Keyboard-friendly navigation and support for reduced motion
 - **SEO Friendly**: Semantic HTML structure for better discoverability
 - **Fast Performance**: Optimized React components for quick load times
 - **GitHub Pages Ready**: One-command deployment to GitHub Pages
@@ -20,8 +20,8 @@ A modern, responsive personal portfolio website built with React.js. This projec
 
 - **Frontend Framework**: [React.js](https://reactjs.org/) (v16.8.6)
 - **Styling**: CSS3 with modern features (Grid, Flexbox, Custom Properties)
-- **Icons**: [FontAwesome](https://fontawesome.com/) for scalable vector icons
-- **Fonts**: Google Fonts (Inter & Space Grotesk)
+- **Graphics**: Inline SVG and CSS
+- **Fonts**: Google Fonts (Manrope & Sora)
 - **Build Tool**: [Vite](https://vite.dev/)
 - **Tests**: [Vitest](https://vitest.dev/) with jsdom
 - **Deployment**: GitHub Pages via gh-pages
@@ -113,7 +113,7 @@ Edit `src/profileData.json` to add your personal information:
 
 ### 2. Replace Profile Picture
 
-Replace the file at `src/Assets/profile.jpg` with your photo. Keep the same filename or update the import in `src/Components/Sidebar.jsx`.
+Replace the file at `src/Assets/profile.jpg` with your photo. Keep the same filename or update the import in `src/Components/Landing.jsx`.
 
 ### 3. Customize Colors
 
@@ -121,15 +121,32 @@ Modify CSS variables in `src/App.css`:
 
 ```css
 :root {
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --dark-bg: #0f1419;
-  --card-bg: #1a1f2e;
-  --text-primary: #e4e6eb;
-  --text-secondary: #b0b3b8;
+  --page-bg: #080b10;
+  --surface: #11161e;
+  --text-primary: #f5f8fc;
+  --text-secondary: #c4ccd7;
+  --accent: #52a8ff;
+  --accent-cool: #a9d8ff;
+  --on-accent: #071321;
 }
 ```
 
-### 4. Configure Custom Domain
+Keep the theme colors in `index.html` and `public/manifest.json` aligned with
+`--page-bg`. If you change `--accent`, update `public/favicon.svg` and
+regenerate the ICO and PNG icons to match.
+
+### 4. Update Portfolio Highlights
+
+The four existing "At a glance" figures are defined in `src/Components/AIStats.jsx`.
+Review and update them separately when your experience changes.
+
+### 5. Update Browser Branding
+
+The browser title is in `index.html`, and the installed-site name is in
+`public/manifest.json`. The monogram source is `public/favicon.svg`; update the
+ICO and PNG icon files as well if you replace it.
+
+### 6. Configure Custom Domain
 
 Update the `homepage` field in `package.json`:
 ```json
@@ -149,7 +166,10 @@ For detailed customization instructions, see [QUICK_START.md](QUICK_START.md).
 ├── index.html             # Vite HTML entry point
 ├── vite.config.mjs        # Build and test configuration
 ├── public/                 # Static files
-│   ├── favicon.ico        # Site favicon
+│   ├── favicon.svg        # Monogram icon source
+│   ├── favicon.ico        # Browser fallback icon
+│   ├── icon-192.png       # Installed-site and Apple touch icon
+│   ├── icon-512.png       # Installed-site icon
 │   └── manifest.json      # PWA manifest
 ├── src/
 │   ├── App.jsx            # Main application component
@@ -158,7 +178,7 @@ For detailed customization instructions, see [QUICK_START.md](QUICK_START.md).
 │   ├── index.css          # Base styles
 │   ├── profileData.json   # Your content (EDIT THIS!)
 │   ├── Components/        # React components
-│   │   ├── Sidebar.jsx    # Navigation sidebar
+│   │   ├── Sidebar.jsx    # Responsive header navigation
 │   │   ├── Landing.jsx    # Hero/landing section
 │   │   ├── Experience.jsx # Work experience timeline
 │   │   ├── Education.jsx  # Education section
@@ -176,11 +196,10 @@ For detailed customization instructions, see [QUICK_START.md](QUICK_START.md).
 
 This portfolio follows modern web design principles:
 
-- **Clean & Minimal**: Focus on content without visual clutter
-- **Dark Theme**: Reduces eye strain and creates a professional look
-- **Gradient Accents**: Adds visual interest without overwhelming
-- **Responsive First**: Mobile-friendly design that scales beautifully
-- **Smooth Animations**: Enhances user experience without being distracting
+- **Personal First**: The introduction leads with the profile, current role, and portrait
+- **AI-Inspired, Not AI-Dependent**: Orbital graphics suggest connected ideas without implying that the site contains a live assistant
+- **Responsive First**: The navigation and layout adapt to desktop and mobile
+- **Thoughtful Motion**: Decorative motion respects the visitor's reduced-motion preference
 
 For detailed design documentation, see [DESIGN_NOTES.md](DESIGN_NOTES.md).
 
@@ -237,7 +256,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 🙏 Acknowledgments
 
 - Built with [Vite](https://vite.dev/) and [React](https://react.dev/)
-- Icons by [FontAwesome](https://fontawesome.com/)
+- Orbital artwork and monogram rendered as SVG
 - Fonts from [Google Fonts](https://fonts.google.com/)
 - Inspired by modern portfolio design trends
 

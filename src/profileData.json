@@ -1,6 +1,6 @@
 {
 	"landing": {
-		"firstName": "Sovan\"mony\" ",
+		"firstName": "Sovan\"Mony\" ",
 		"lastName": "Lim",
 		"phoneNumber": "(857)-776-2663",
 		"bio": "Passionate programmer with an entrepreneurial mindset. Enjoy learning new emerging technologies and applications in the real world. Experienced Engineer with a demonstrated history of working in specialized financial services and technology. Skilled in Python, C++, JavaScript, and web development. Interested in Fin-Tech, IoT, Payment Services, Financial Services, Crypto-currency, Blockchain, Logistics, and Stock Market. Learn, Share and Inspire.",
@@ -64,20 +64,6 @@
 			"aboutWork": "Conducted retail activities such as prepared business strategies, managed inventory, implemented marketing activities, fulfilled and shipped online orders. Acted as the primary point of contact for customers including orders, order inquiries, shipping inquiries, returns, and complaints. Managed online store revenue including cash handling and ensured an accurate to all payment processing and refunds.",
 			"fromDate": "January 2017",
 			"toDate": "December 2018"
-		},
-		{
-			"position": "Information Technology Support Technician",
-			"organization": "American University of Phnom Penh",
-			"aboutWork": "Worked closely with IT department manager and provided on-site technical support to students and professors. Resolved hardware and software issues such as operating system configuration, password reset, and printer hook-ups.",
-			"fromDate": "January 2016",
-			"toDate": "July 2016"
-		},
-		{
-			"position": "Software Engineer Intern",
-			"organization": "ArrowDot Co., Ltd",
-			"aboutWork": "Collaborated in an Agile development ecosystem to develop, test, deploy end-to-end web application, such as new software releases, bug fixes, feature enhancements, application optimizations, and documentation updates. Supported Mobile Application Engineers in planning, designing, developing, and implementing a high-performance user-friendly mobile application in Java. Implemented internal automated tools to optimize manual task execution across a wide variety of projects.",
-			"fromDate": "January 2015",
-			"toDate": "March 2015"
 		}
 	],
 	"education": [{

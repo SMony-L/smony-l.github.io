@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 import Sidebar from './Components/Sidebar';
 import Landing from './Components/Landing';
-import Experience from './Components/Experience';
-import Education from './Components/Education';
-import Skills from './Components/Skills';
-import Projects from './Components/Projects';
-import Footer from './Components/Footer';
-import ParticleBackground from './Components/ParticleBackground';
-import AIAssistant from './Components/AIAssistant';
-import MatrixRain from './Components/MatrixRain';
-import NeuralNetwork from './Components/NeuralNetwork';
 import AIStats from './Components/AIStats';
+import Projects from './Components/Projects';
+import Experience from './Components/Experience';
+import Skills from './Components/Skills';
+import Education from './Components/Education';
+import Footer from './Components/Footer';
 import profileData from './profileData.json';
-import ReactGA from 'react-ga';
 import './App.css';
 
 class App extends Component {
@@ -32,22 +28,21 @@ class App extends Component {
   }
 
   render() {
+    const { landingData, experience, education, skills, projects } = this.state;
+
     return (
       <div className="App">
-        <NeuralNetwork />
-        <ParticleBackground />
-        <MatrixRain />
-        <AIAssistant />
-        <Sidebar sidebarData={this.state.landingData} />
-        <main className="main-content">
-          <Landing landingData={this.state.landingData} />
+        <a className="skip-link" href="#main-content">Skip to content</a>
+        <Sidebar sidebarData={landingData} />
+        <main className="main-content" id="main-content" tabIndex="-1">
+          <Landing landingData={landingData} currentRole={experience[0]} />
           <AIStats />
-          <Experience experience={this.state.experience} />
-          <Education education={this.state.education} />
-          <Skills skills={this.state.skills} />
-          <Projects projects={this.state.projects} />
+          <Projects projects={projects} githubUrl={landingData.github} />
+          <Experience experience={experience} />
+          <Skills skills={skills} />
+          <Education education={education} />
         </main>
-        <Footer />
+        <Footer landingData={landingData} />
       </div>
     );
   }

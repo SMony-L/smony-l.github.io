@@ -1,198 +1,44 @@
-/* Education Section */
-.education-grid {
+.education-item {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: 32px;
-  margin-top: 3rem;
+  padding: 34px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
-.education-card {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  transition: all 0.3s ease;
-}
-
-/* Education Icon */
-.education-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-purple) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.education-icon::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-cyan) 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.education-icon svg {
-  font-size: 1.8rem;
-  color: white;
-  position: relative;
-  z-index: 1;
-}
-
-.education-card:hover .education-icon {
-  transform: rotate(5deg) scale(1.1);
-}
-
-.education-card:hover .education-icon::before {
-  opacity: 1;
-}
-
-/* Education Content */
-.education-content {
-  flex: 1;
+.education-item + .education-item {
+  border-top: 0;
 }
 
 .education-university {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 16px 0;
-  line-height: 1.3;
+  max-width: 24ch;
+  font-size: clamp(1.35rem, 2.3vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.03em;
 }
 
 .education-degree {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-  padding: 8px 16px;
-  background: rgba(0, 212, 255, 0.06);
-  border: 1px solid rgba(0, 212, 255, 0.15);
-  border-radius: 8px;
-  width: fit-content;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--neon-cyan);
-  font-family: var(--mono-font);
+  margin-bottom: 9px;
+  font-weight: 800;
+  line-height: 1.6;
 }
 
-.degree-icon {
-  font-size: 1rem;
-  color: var(--neon-cyan);
-}
-
-.education-major {
-  font-size: 1rem;
-  line-height: 1.7;
+.education-major,
+.education-date {
   color: var(--text-secondary);
-  margin: 16px 0 0 0;
+  font-size: 0.94rem;
+  line-height: 1.7;
 }
 
 .education-date {
-  margin-top: 16px;
-  padding: 6px 14px;
-  background: rgba(0, 212, 255, 0.04);
-  border-left: 2px solid rgba(0, 212, 255, 0.4);
-  border-radius: 4px;
-  font-size: 0.85rem;
-  color: var(--neon-cyan);
-  font-weight: 500;
-  display: inline-block;
-  font-family: var(--mono-font);
+  margin-top: 12px;
 }
 
-/* Hover Effects */
-.education-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
-}
-
-/* Responsive Styles */
-@media (max-width: 992px) {
-  .education-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-  }
-
-  .education-icon {
-    width: 56px;
-    height: 56px;
-  }
-
-  .education-icon svg {
-    font-size: 1.6rem;
-  }
-
-  .education-university {
-    font-size: 1.3rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .education-grid {
+@media (max-width: 700px) {
+  .education-item {
     grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .education-card {
-    gap: 20px;
-  }
-
-  .education-icon {
-    width: 52px;
-    height: 52px;
-  }
-
-  .education-icon svg {
-    font-size: 1.5rem;
-  }
-
-  .education-university {
-    font-size: 1.2rem;
-  }
-
-  .education-degree {
-    font-size: 0.95rem;
-  }
-
-  .education-major {
-    font-size: 0.95rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .education-card {
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-  }
-
-  .education-icon {
-    margin-bottom: 8px;
-  }
-
-  .education-degree {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .education-date {
-    text-align: center;
-  }
-
-  .education-university {
-    font-size: 1.1rem;
-  }
-
-  .education-major {
-    font-size: 0.9rem;
+    gap: 18px;
   }
 }

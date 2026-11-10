@@ -1,46 +1,60 @@
 import React, { Component } from 'react';
-import image from '../Assets/profile.jpg';
 import './Sidebar.css';
+
+const navItems = [
+  { id: 'about', label: 'About' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'education', label: 'Education' },
+];
 
 class Sidebar extends Component {
   constructor(props) {
     super(props);
 
-    this.sidebarData = props.sidebarData;
     this.state = {
       isOpen: false,
-      activeSection: 'about'
+      activeSection: 'about',
     };
+    this.menuButton = React.createRef();
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll, { passive: true });
+    window.addEventListener('keydown', this.handleKeyDown);
+    this.handleScroll();
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('keydown', this.handleKeyDown);
   }
 
   handleScroll = () => {
-    const sections = ['about', 'experience', 'education', 'skills', 'projects'];
-    const scrollPosition = window.scrollY + 200;
+    let activeSection = 'about';
 
-    for (let section of sections) {
-      const element = document.getElementById(section);
-      if (element) {
-        const offsetTop = element.offsetTop;
-        const offsetBottom = offsetTop + element.offsetHeight;
-
-        if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
-          this.setState({ activeSection: section });
-          break;
-        }
+    navItems.forEach((item) => {
+      const section = document.getElementById(item.id);
+      if (section && section.getBoundingClientRect().top <= 150) {
+        activeSection = item.id;
       }
+    });
+
+    if (activeSection !== this.state.activeSection) {
+      this.setState({ activeSection });
+    }
+  };
+
+  handleKeyDown = (event) => {
+    if (event.key === 'Escape' && this.state.isOpen) {
+      this.closeSidebar();
+      this.menuButton.current.focus();
     }
   };
 
   toggleSidebar = () => {
-    this.setState({ isOpen: !this.state.isOpen });
+    this.setState((state) => ({ isOpen: !state.isOpen }));
   };
 
   closeSidebar = () => {
@@ -49,76 +63,58 @@ class Sidebar extends Component {
 
   render() {
     const { isOpen, activeSection } = this.state;
-    const navItems = [
-      { id: 'about', label: 'About', icon: '⌘' },
-      { id: 'experience', label: 'Experience', icon: '◆' },
-      { id: 'education', label: 'Education', icon: '◇' },
-      { id: 'skills', label: 'Skills', icon: '⚡' },
-      { id: 'projects', label: 'Projects', icon: '▶' }
-    ];
+    const { sidebarData } = this.props;
+    const firstName = sidebarData.firstName.trim();
+    const initials = `${firstName.charAt(0)}${sidebarData.lastName.charAt(0)}`;
 
     return (
-      <>
-        {/* Mobile Header */}
-        <div className="mobile-header">
-          <div className="mobile-header-content">
-            <span className="mobile-name">{this.sidebarData.firstName} {this.sidebarData.lastName}</span>
-            <button className="mobile-toggle" onClick={this.toggleSidebar} aria-label="Toggle navigation">
-              <span className={`hamburger ${isOpen ? 'open' : ''}`}>
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </button>
-          </div>
-        </div>
+      <header className="site-header">
+        <div className="site-header-inner">
+          <a className="site-brand" href="#about" onClick={this.closeSidebar}>
+            <span className="brand-mark" aria-hidden="true">{initials}<span>.</span></span>
+            <span className="brand-name">{firstName} {sidebarData.lastName}</span>
+          </a>
 
-        {/* Sidebar Overlay */}
-        {isOpen && <div className="sidebar-overlay" onClick={this.closeSidebar}></div>}
+          <button
+            ref={this.menuButton}
+            className="mobile-toggle"
+            type="button"
+            onClick={this.toggleSidebar}
+            aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
+            aria-expanded={isOpen}
+            aria-controls="portfolio-navigation"
+          >
+            <span className={`menu-icon ${isOpen ? 'is-open' : ''}`} aria-hidden="true">
+              <span></span>
+              <span></span>
+            </span>
+          </button>
 
-        {/* Sidebar */}
-        <nav className={`modern-sidebar ${isOpen ? 'open' : ''}`}>
-          <div className="sidebar-content">
-            {/* Profile Section */}
-            <div className="sidebar-profile">
-              <div className="profile-image-wrapper">
-                <img className="profile-image" src={image} alt={`${this.sidebarData.firstName} ${this.sidebarData.lastName}`} />
-                <div className="profile-image-border"></div>
-              </div>
-              <h2 className="profile-name">
-                {this.sidebarData.firstName}<br />
-                <span className="gradient-text">{this.sidebarData.lastName}</span>
-              </h2>
-              <div className="sidebar-agent-badge">
-                <span className="status-dot"></span>
-                <span>ACTIVE</span>
-              </div>
-            </div>
-
-            {/* Navigation */}
-            <ul className="sidebar-nav">
+          <nav
+            id="portfolio-navigation"
+            className={`site-nav ${isOpen ? 'is-open' : ''}`}
+            aria-label="Main navigation"
+          >
+            <ul className="site-nav-list">
               {navItems.map((item) => (
                 <li key={item.id}>
                   <a
-                    className={`nav-link-modern ${activeSection === item.id ? 'active' : ''}`}
+                    className={activeSection === item.id ? 'is-active' : ''}
                     href={`#${item.id}`}
                     onClick={this.closeSidebar}
+                    aria-current={activeSection === item.id ? 'location' : undefined}
                   >
-                    <span className="nav-icon">{item.icon}</span>
-                    <span className="nav-label">{item.label}</span>
-                    <span className="nav-indicator"></span>
+                    {item.label}
                   </a>
                 </li>
               ))}
             </ul>
-
-            {/* Footer */}
-            <div className="sidebar-footer">
-              <p className="sidebar-footer-text">© 2025 {this.sidebarData.firstName}</p>
-            </div>
-          </div>
-        </nav>
-      </>
+            <a className="nav-contact" href={`mailto:${sidebarData.email}`} onClick={this.closeSidebar}>
+              Get in touch <span aria-hidden="true">↗</span>
+            </a>
+          </nav>
+        </div>
+      </header>
     );
   }
 }

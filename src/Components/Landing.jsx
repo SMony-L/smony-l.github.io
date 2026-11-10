@@ -1,106 +1,80 @@
-import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
+import image from '../Assets/profile.jpg';
 import './Landing.css';
 
-class Landing extends Component {
-  constructor(props) {
-    super(props);
+const Landing = ({ landingData, currentRole }) => {
+  const firstName = landingData.firstName.trim();
+  const phoneLink = landingData.phoneNumber.replace(/[^\d+]/g, '');
 
-    this.landingData = props.landingData;
-  }
-
-  render() {
-    return (
-      <section className="landing-section portfolio-section" id="about">
-        <div className="landing-container">
+  return (
+    <section className="landing-section" id="about">
+      <div className="landing-container">
+        <div className="landing-layout">
           <div className="landing-content">
-            {/* Agent Status Bar */}
-            <div className="agent-status fade-in-up">
-              <span className="status-dot"></span>
-              <span className="status-text">AGENT ONLINE</span>
-              <span className="status-separator">|</span>
-              <span className="status-version">v2.0.26</span>
-            </div>
-
-            {/* Terminal-style Greeting */}
-            <div className="greeting fade-in-up">
-              <span className="terminal-prompt">$</span> Hello, I'm
-            </div>
-
-            {/* Name with Gradient */}
-            <h1 className="landing-name fade-in-up">
-              {this.landingData.firstName}{' '}
-              <span className="gradient-text">{this.landingData.lastName}</span>
+            <h1 className="landing-name">
+              <span>{firstName}</span>
+              <span>{landingData.lastName}<span className="name-period">.</span></span>
             </h1>
 
-            {/* Animated Title/Role */}
-            <div className="landing-title fade-in-up">
-              <span className="typing-text">Customer Success Architect @ GitHub</span>
-            </div>
+            {currentRole && (
+              <p className="landing-title">
+                {currentRole.position} <span>at</span> {currentRole.organization}
+              </p>
+            )}
 
-            {/* Bio */}
-            <p className="landing-bio fade-in-up">
-              {this.landingData.bio}
-            </p>
+            <p className="landing-bio">{landingData.bio}</p>
 
-            {/* Contact Info Cards */}
-            <div className="contact-cards fade-in-up">
-              <a href={`mailto:${this.landingData.email}`} className="contact-card">
-                <FontAwesomeIcon icon={faEnvelope} className="contact-icon" />
-                <span className="contact-text">{this.landingData.email}</span>
+            <div className="hero-actions">
+              <a className="button button-primary" href="#projects">
+                Explore my work <span aria-hidden="true">↓</span>
               </a>
-              <a href={`tel:${this.landingData.phoneNumber}`} className="contact-card">
-                <FontAwesomeIcon icon={faPhone} className="contact-icon" />
-                <span className="contact-text">{this.landingData.phoneNumber}</span>
+              <a className="button button-secondary" href={`mailto:${landingData.email}`}>
+                Let's connect <span aria-hidden="true">↗</span>
               </a>
             </div>
 
-            {/* Social Links */}
-            <div className="social-links fade-in-up">
-              <a
-                href={this.landingData.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-link linkedin"
-                aria-label="LinkedIn"
-              >
-                <FontAwesomeIcon icon={faLinkedin} />
-                <span>LinkedIn</span>
+            <div className="hero-socials" role="group" aria-label="Contact and social links">
+              <a href={landingData.linkedin} target="_blank" rel="noopener noreferrer">
+                LinkedIn <span aria-hidden="true">↗</span>
               </a>
-              <a
-                href={this.landingData.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-link github"
-                aria-label="GitHub"
-              >
-                <FontAwesomeIcon icon={faGithub} />
-                <span>GitHub</span>
+              <a href={landingData.github} target="_blank" rel="noopener noreferrer">
+                GitHub <span aria-hidden="true">↗</span>
               </a>
-            </div>
-
-            {/* Scroll Indicator */}
-            <div className="scroll-indicator">
-              <div className="mouse">
-                <div className="wheel"></div>
-              </div>
-              <p>Scroll to explore</p>
+              <a href={`tel:${phoneLink}`}>{landingData.phoneNumber}</a>
             </div>
           </div>
 
-          {/* Background Decoration */}
-          <div className="landing-decoration">
-            <div className="decoration-circle circle-1"></div>
-            <div className="decoration-circle circle-2"></div>
-            <div className="decoration-circle circle-3"></div>
-            <div className="grid-overlay"></div>
+          <div className="hero-art">
+            <div className="portrait-halo" aria-hidden="true"></div>
+            <svg className="orbit-diagram" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+              <circle cx="300" cy="300" r="248" className="orbit-ring orbit-ring-outer" />
+              <circle cx="300" cy="300" r="211" className="orbit-ring orbit-ring-inner" />
+              <ellipse cx="300" cy="300" rx="270" ry="155" transform="rotate(-35 300 300)" className="orbit-path" />
+              <ellipse cx="300" cy="300" rx="266" ry="160" transform="rotate(39 300 300)" className="orbit-path orbit-path-soft" />
+              <g className="orbit-runner">
+                <circle cx="300" cy="52" r="6" className="orbit-point" />
+                <circle cx="300" cy="52" r="14" className="orbit-point-outline" />
+              </g>
+              <circle cx="92" cy="204" r="4" className="orbit-point-small" />
+              <circle cx="502" cy="395" r="4" className="orbit-point-small" />
+            </svg>
+            <div className="portrait-frame">
+              <img src={image} alt={`Portrait of ${firstName} ${landingData.lastName}`} />
+            </div>
+            <div className="portrait-note">
+              <span className="portrait-note-mark" aria-hidden="true">✳</span>
+              <span>Learn, share<br />and inspire.</span>
+            </div>
           </div>
         </div>
-      </section>
-    );
-  }
-}
+
+        <div className="landing-bottom">
+          <span>Curiosity meets possibility.</span>
+          <a href="#projects">Scroll to explore <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default Landing;

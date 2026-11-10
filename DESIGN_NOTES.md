@@ -1,131 +1,26 @@
-# Modern Portfolio Redesign
+# Portfolio Design Notes
 
-## 🎨 Design Overview
+## Direction
 
-Your portfolio has been completely redesigned with a modern, clean aesthetic that emphasizes readability and visual appeal across all devices.
+The portfolio leads with the person's name, current role, biography, and portrait. An orbital illustration and a black, white, and electric-blue palette give the site an AI-inspired character without presenting decorative graphics as a working AI assistant.
 
-## ✨ Key Design Features
+The first screen pairs the introduction and contact actions with the portrait. Visitors can continue into projects, experience, skills, education, and a contact footer. Project and career descriptions remain sourced from `src/profileData.json`.
 
-### Color Scheme
-- **Dark Theme**: Modern dark background (#0f1419) for reduced eye strain
-- **Primary Gradient**: Purple-to-violet gradient (667eea → 764ba2)
-- **Accent Colors**: Multiple gradient options for visual variety
-- **Typography**: Inter font for body text, Space Grotesk for headings
+## Visual system
 
-### Modern Components
+- **Colors:** Shared page, text, line, and accent variables live in `src/App.css`. Dark neutral surfaces, blue accents, and a blue footer carry the palette across the page; the portrait is displayed in grayscale.
+- **Typography:** Sora is used for headings and Manrope for body copy, with system fallbacks in `src/index.css`.
+- **Layout:** A sticky header replaces the fixed sidebar. Projects use a two-column showcase on wider screens; experience and education use readable, separated rows.
+- **Motion:** The portrait orbit is decorative. The global reduced-motion rule stops it and minimizes transitions when the visitor requests less motion.
 
-#### 1. **Sidebar Navigation**
-- Fixed sidebar on desktop with smooth scroll tracking
-- Mobile hamburger menu with overlay
-- Animated active state indicators
-- Profile image with pulsing gradient border
-- Emoji icons for visual appeal
+## Content and links
 
-#### 2. **Landing/Hero Section**
-- Animated greeting with waving hand emoji
-- Large gradient text for name
-- Typing cursor effect
-- Contact cards with hover effects
-- Social links with gradient backgrounds
-- Floating gradient orbs in background
-- Scroll indicator animation
+- Edit profile, experience, education, skills, and projects in `src/profileData.json`.
+- The existing "At a glance" figures are maintained separately in `src/Components/AIStats.jsx`; verify them when updating the profile.
+- The project footer links to the GitHub URL in the landing data. Email, phone, LinkedIn, and GitHub links also use the profile data.
+- Replace `src/Assets/profile.jpg` to update the portrait. Its import is in `src/Components/Landing.jsx`.
+- Browser and installed-site branding uses the monogram in `public/favicon.svg` and its ICO/PNG versions, with the site name in `index.html` and `public/manifest.json`.
 
-#### 3. **Experience Section**
-- Timeline layout with connected dots
-- Card-based design for each position
-- Date badges with icons
-- Hover effects with gradient overlays
-- Smooth animations on scroll
+## Responsive and accessibility details
 
-#### 4. **Education Section**
-- Icon-based card design
-- Graduation cap icons with gradient backgrounds
-- Degree badge with award icon
-- Responsive grid layout
-
-#### 5. **Skills Section**
-- Modern badge grid layout
-- Hover effects with glow animations
-- Responsive grid that adapts to screen size
-- Clean, minimal design
-
-#### 6. **Projects Section**
-- Card-based layout with rocket icons
-- Tech stack badges
-- Hover effects with overlay gradients
-- Footer with call-to-action
-
-## 🎯 Design Principles
-
-1. **Clean & Clear**: Removed visual clutter, focused on content
-2. **Modern**: Contemporary design trends (glassmorphism, gradients, animations)
-3. **Responsive**: Mobile-first approach, works on all devices
-4. **Accessible**: Good contrast ratios, semantic HTML
-5. **Performant**: CSS animations, optimized for smooth scrolling
-
-## 📱 Responsive Breakpoints
-
-- **Desktop**: 992px and above (sidebar visible)
-- **Tablet**: 768px - 991px (hamburger menu)
-- **Mobile**: 576px - 767px
-- **Small Mobile**: Below 576px
-
-## 🚀 Features
-
-- Smooth scroll behavior
-- Animated section entrances
-- Active navigation highlighting
-- Hover effects throughout
-- Custom scrollbar design
-- Mobile-optimized navigation
-- Touch-friendly interface
-
-## 🎨 Customization
-
-### Colors
-All colors are defined as CSS variables in `App.css`:
-```css
---primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
---dark-bg: #0f1419;
---card-bg: #1a1f2e;
---text-primary: #e4e6eb;
---text-secondary: #b0b3b8;
-```
-
-### Fonts
-Update font imports in `index.css`:
-- Body: Inter
-- Headings: Space Grotesk
-
-## 📝 To Update Content
-
-Simply edit `profileData.json` - all content is dynamically rendered from this file. No need to touch the component files!
-
-## 🛠️ Technology Stack
-
-- React 16.8+
-- CSS3 with modern features (Grid, Flexbox, Custom Properties)
-- FontAwesome icons
-- Google Fonts
-- Responsive design principles
-
-## 📦 Deployment
-
-Run these commands to deploy:
-```bash
-npm run build
-npm run deploy
-```
-
-Your site will be deployed to GitHub Pages!
-
-## 🎉 Enjoy Your New Portfolio!
-
-This design is:
-- ✅ Modern and professional
-- ✅ Easy to navigate
-- ✅ Mobile-friendly
-- ✅ Fast and performant
-- ✅ Easy to customize
-
-Just update your `profileData.json` with your information and you're good to go!
+The header collapses to a menu at 1000px, and the main layouts stack on smaller screens. The menu exposes its expanded state, closes on Escape or link selection, and returns focus to its button when dismissed with Escape. Sections remain addressable by their original fragment identifiers.

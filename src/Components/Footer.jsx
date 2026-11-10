@@ -1,42 +1,37 @@
 import React from 'react';
 import './Footer.css';
 
-const Footer = () => {
+const Footer = ({ landingData }) => {
   const currentYear = new Date().getFullYear();
+  const firstName = landingData.firstName.trim();
+  const phoneLink = landingData.phoneNumber.replace(/[^\d+]/g, '');
 
   return (
-    <footer className="portfolio-footer">
+    <footer className="portfolio-footer" id="contact">
       <div className="footer-content">
-        <div className="footer-main">
-          <div className="copilot-badge">
-            <span className="status-dot"></span>
-            <span>Powered by</span>
-            <strong className="gradient-text">GitHub Copilot</strong>
+        <div className="footer-callout">
+          <div>
+            <h2>Let's connect.</h2>
+            <p>Have an idea or just want to say hello?</p>
           </div>
+          <a className="footer-email" href={`mailto:${landingData.email}`}>
+            {landingData.email} <span aria-hidden="true">↗</span>
+          </a>
+        </div>
 
-          <div className="footer-divider"></div>
-
-          <p className="footer-text">
-            <span className="footer-code">{'>'}</span> Designed & Built by <span className="gradient-text">Sovan"mony" Lim</span>
-          </p>
+        <div className="footer-links">
+          <a href={`tel:${phoneLink}`}>{landingData.phoneNumber}</a>
+          <a href={landingData.linkedin} target="_blank" rel="noopener noreferrer">
+            LinkedIn <span aria-hidden="true">↗</span>
+          </a>
+          <a href={landingData.github} target="_blank" rel="noopener noreferrer">
+            GitHub <span aria-hidden="true">↗</span>
+          </a>
         </div>
 
         <div className="footer-bottom">
-          <p>© {currentYear} All rights reserved.</p>
-          <div className="footer-tech">
-            <span>React</span>
-            <span className="tech-dot">·</span>
-            <span>CSS3</span>
-            <span className="tech-dot">·</span>
-            <span>GitHub Pages</span>
-          </div>
-        </div>
-
-        {/* AI-themed decorative elements */}
-        <div className="footer-decorations">
-          <div className="footer-circuit"></div>
-          <div className="footer-circuit"></div>
-          <div className="footer-circuit"></div>
+          <p>© {currentYear} {firstName} {landingData.lastName}. All rights reserved.</p>
+          <p>Designed &amp; Built by {firstName} {landingData.lastName} · Powered by GitHub Copilot</p>
         </div>
       </div>
     </footer>

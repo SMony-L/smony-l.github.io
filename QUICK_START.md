@@ -22,7 +22,7 @@ npm run deploy
 
 ## 📝 Updating Content
 
-All content comes from `profileData.json`. Update these sections:
+The main profile content comes from `src/profileData.json`. Update these sections:
 
 ### 1. Personal Info (landing)
 ```json
@@ -93,39 +93,29 @@ Edit `src/App.css` and change these CSS variables:
 
 ```css
 :root {
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --dark-bg: #0f1419;
-  --card-bg: #1a1f2e;
-  --text-primary: #e4e6eb;
-  --text-secondary: #b0b3b8;
+  --page-bg: #080b10;
+  --surface: #11161e;
+  --text-primary: #f5f8fc;
+  --text-secondary: #c4ccd7;
+  --accent: #52a8ff;
+  --accent-cool: #a9d8ff;
+  --on-accent: #071321;
 }
 ```
 
-### Popular Color Schemes
+The project, skills, portrait, and footer surfaces also have component-specific colors in their respective CSS files. Keep the theme colors in `index.html` and `public/manifest.json` aligned with `--page-bg`; if `--accent` changes, update `public/favicon.svg` and regenerate the ICO and PNG icons. Check text contrast when changing the palette.
 
-**Blue Theme:**
-```css
---primary-gradient: linear-gradient(135deg, #667eea 0%, #4facfe 100%);
-```
+### Update the Highlights
 
-**Orange/Red Theme:**
-```css
---primary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-```
+The existing figures in the "At a glance" strip are in `src/Components/AIStats.jsx`, rather than the JSON file. Review them separately when your experience changes.
 
-**Green Theme:**
-```css
---primary-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-```
+### Update Browser Branding
 
-**Cyan Theme:**
-```css
---primary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-```
+Edit the title in `index.html`, the name in `public/manifest.json`, and the monogram in `public/favicon.svg` when personalizing the site. Regenerate the ICO and PNG icon files from the updated SVG.
 
 ## 🖼️ Changing Profile Picture
 
-Replace `src/Assets/profile.jpg` with your photo. Keep the same filename or update the import in `Sidebar.jsx`.
+Replace `src/Assets/profile.jpg` with your photo. Keep the same filename or update the import in `Landing.jsx`.
 
 ## 🔧 Common Tasks
 
@@ -149,10 +139,7 @@ body {
 ```
 
 ### Adjust Animations
-Change animation delays in components:
-```jsx
-style={{ animationDelay: `${index * 0.1}s` }}
-```
+The portrait orbit is defined in `src/Components/Landing.css`. Reduced-motion behavior is in `src/App.css`.
 
 ## 📱 Testing Responsive Design
 

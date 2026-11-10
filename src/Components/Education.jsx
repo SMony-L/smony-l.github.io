@@ -1,53 +1,30 @@
-import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGraduationCap, faAward } from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
 import './Education.css';
 
-class Education extends Component {
-  constructor(props) {
-    super(props);
+const Education = ({ education }) => (
+  <section className="portfolio-section education-section" id="education">
+    <div className="section-container">
+      <div className="section-heading">
+        <h2 className="section-title">Education</h2>
+        <p className="section-intro">Where the foundations came together.</p>
+      </div>
 
-    this.education = props.education;
-  }
-
-  render() {
-    return (
-      <section className="portfolio-section" id="education">
-        <div className="section-container">
-          <h2 className="section-title">Education</h2>
-          
-          <div className="education-grid">
-            {this.education.map((data, index) => (
-              <div key={index} className="education-card modern-card fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
-                {/* Icon */}
-                <div className="education-icon">
-                  <FontAwesomeIcon icon={faGraduationCap} />
-                </div>
-
-                {/* Content */}
-                <div className="education-content">
-                  <h3 className="education-university">{data.university}</h3>
-                  
-                  <div className="education-degree">
-                    <FontAwesomeIcon icon={faAward} className="degree-icon" />
-                    <span>{data.degree}</span>
-                  </div>
-
-                  <p className="education-major">{data.major}</p>
-
-                  {data.fromDate !== "NA" && data.toDate !== "NA" && (
-                    <div className="education-date">
-                      {data.fromDate} - {data.toDate}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-}
+      <div className="education-list">
+        {education.map((item, index) => (
+          <article className="education-item" key={`${item.university}-${item.degree}-${index}`}>
+            <h3 className="education-university">{item.university}</h3>
+            <div className="education-details">
+              <p className="education-degree">{item.degree}</p>
+              <p className="education-major">{item.major}</p>
+              {item.fromDate !== 'NA' && item.toDate !== 'NA' && (
+                <p className="education-date">{item.fromDate} &mdash; {item.toDate}</p>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 
 export default Education;
